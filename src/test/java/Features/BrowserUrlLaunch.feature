@@ -1,7 +1,16 @@
 Feature: Launch
-  @T_01
-  Scenario:Select Earth option in Dark Theme drop down
+  @T_09
+  Scenario: Open Google and verify title
+    Given Chrome browser is launched on mobile device
+    When I open Google homepage
+    Then I should see the title contains "Google"
+
+ @T_10
+  Scenario: Validate mobile key actions
     Given  User launches API Demo App
-    When User navigates to Dark Theme dropdown section
-    And User selects "Earth"from dropdown
-    Then Dropdown selection should be completed
+    When I press "BACK"
+    And I press "ENTER"
+    And I long press "MENU"
+    And I press "HOME"
+    And I press "VOLUME_UP"
+    Then Key actions should be executed successfully

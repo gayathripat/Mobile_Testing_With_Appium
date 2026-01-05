@@ -6,6 +6,8 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.touch.LongPressOptions;
 import io.appium.java_client.touch.offset.ElementOption;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 import org.openqa.selenium.WebElement;
 
 public class ReusableMethods {
@@ -27,6 +29,51 @@ public class ReusableMethods {
     public void longPress(WebElement element){
         TouchAction TA=new TouchAction(driver);
         TA.longPress(LongPressOptions.longPressOptions().withElement(ElementOption.element(element))).release().perform();
+    }
+
+    public void pressKey(AndroidKey key) {
+        driver.pressKey(new KeyEvent(key));
+    }
+
+    public void longPressKey(AndroidKey key) {
+        driver.pressKey(new KeyEvent(key));
+    }
+
+    // Frequently used actions
+    public void goBack() {
+        pressKey(AndroidKey.BACK);
+        //driver.navigate().back();
+       // driver.navigate().forward();
+
+    }
+
+    public void pressEnter() {
+        pressKey(AndroidKey.ENTER);
+
+    }
+
+    public void goHome() {
+        pressKey(AndroidKey.HOME);
+    }
+
+    public void volumeUp() {
+        pressKey(AndroidKey.VOLUME_UP);
+    }
+
+    public void volumeDown() {
+        pressKey(AndroidKey.VOLUME_DOWN);
+    }
+
+    public void pressSearch() {
+        pressKey(AndroidKey.SEARCH);
+    }
+    public void getCurrentActivity() {
+        System.out.println(driver.getCurrentUrl());
+        System.out.println(driver.currentActivity());
+        System.out.println(driver.getContext());
+        System.out.println(driver.getOrientation());
+        System.out.println(driver.isDeviceLocked());
+
     }
 
 }

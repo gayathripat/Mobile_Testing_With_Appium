@@ -7,6 +7,8 @@ import Utility.Reusables;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
@@ -88,6 +90,20 @@ public class TestBase {
         System.out.println("App launch successfully");
 return driver;
 
+    }
+    public  AndroidDriver<MobileElement> launchMobileChrome () {
+        System.setProperty("webdriver.chrome.driver", "D:\\APPIUM\\chrome-win64\\chrome-win64\\chrome.exe");
+
+        String deviceId = "5554"; // replace from adb devices
+
+        ChromeOptions options = new ChromeOptions();
+        options.setExperimentalOption("androidPackage", "com.android.chrome");
+        options.setExperimentalOption("androidUseRunningApp", true);
+        options.setExperimentalOption("androidDeviceSerial", deviceId);
+
+        driver = new AndroidDriver<>(options);
+        driver.get("https://www.google.com");
+        return driver;
     }
 
     public void closeApp()

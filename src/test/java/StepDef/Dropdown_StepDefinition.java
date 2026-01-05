@@ -13,6 +13,8 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -20,7 +22,9 @@ import org.testng.Assert;
 import java.net.MalformedURLException;
 import java.util.List;
 
+import static Scripts.DragAndDrop.doubleTap;
 import static Scripts.TestBase.driver;
+import static org.junit.Assert.assertTrue;
 
 public class Dropdown_StepDefinition extends TestBase {
     TestBase base=new TestBase();
@@ -175,5 +179,39 @@ System.out.println("Dropdown select validated successfully");
         String CMenu=Constants.Login.getProperty("SampleAction");
         WebElement ContextMenu=Constants.key.FindElement(CMenu);
         System.out.println(ContextMenu.getText());
+    }
+
+    @Given("Chrome browser is launched on mobile device")
+    public void chromeBrowserIsLaunchedOnMobileDevice() {
+        System.setProperty("webdriver.chrome.driver", "D:\\APPIUM\\chrome-win64\\chrome-win64\\chrome.exe");
+
+        String deviceId = "YOUR_DEVICE_ID"; // replace from adb devices
+
+        ChromeOptions options = new ChromeOptions();
+        options.setExperimentalOption("androidPackage", "com.android.chrome");
+        options.setExperimentalOption("androidUseRunningApp", true);
+        options.setExperimentalOption("androidDeviceSerial", deviceId);
+
+        driver = new AndroidDriver<>(options);
+    }
+
+    @When("I open Google homepage")
+    public void iOpenGoogleHomepage() {
+        driver.get("https://www.google.com");
+    }
+
+    @Then("I should see the title contains {string}")
+    public void iShouldSeeTheTitleContains(String expected) {
+        assertTrue(driver.getTitle().contains(expected));
+        driver.quit();
+    }
+
+    @Then("User click on  “Double Tap Me” button")
+    public void userClickOnDoubleTapMeButton(String elementId) {
+       // WebElement element = Hooks.driver.findElement(By.id(elementId));
+
+        String DoubleClickEle=Constants.Login.getProperty("ExpandableList");
+        WebElement element =  Constants.key.FindElement(DoubleClickEle);
+        doubleTap(element);
     }
 }

@@ -65,7 +65,7 @@ public class MobileGestures extends TestBase{
         }
         driver.context("WEBVIEW_stetho_com.google.android.apps.messaging");
 
-
+driver.findElement(By.xpath("q")).sendKeys("hi");
 
 
 

@@ -45,3 +45,21 @@ Feature: Verifying Functionalities on Views feature on Api Demo App
       Then User click on Custom Adapter
       And User Perform long press on people Names
       Then Verify context menu
+
+  @T_06
+  Scenario:Verify Double click functionality
+    Given  User launches API Demo App
+    And User click Views option from home page
+    And User click on Buttons
+    Then User click on  “Double Tap Me” button
+    And User Perform double tap / double click on button
+    Then Verify the button response (color change / toast message / text change)
+
+  @T_07
+  Scenario:Verify Double click functionality
+    Given  User launches API Demo App
+    And User click Views option from home page
+    And User click on Buttons
+    Then User click on  “Double Tap Me” button
+    And User Perform double tap / double click on button
+    Then Verify the button response (color change / toast message / text change)
