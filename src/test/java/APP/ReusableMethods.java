@@ -24,8 +24,16 @@ public class ReusableMethods {
         driver.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().resourceId(\"com.androidsample.generalstore:id/rvProductList\")).scrollIntoView(new UiSelector().text(\""+Text+"\"))"));
     }
     public void selectText(String visibleText){
-        driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().text(\""+visibleText+"\"))")).click();
+        driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().text(\""+visibleText+"\")")).click();
     }
+
+//    public void SelectText(String visibleText){
+//
+//
+//        driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().text(\""+visibleText+"\")")).click();
+//
+//
+//    }
     public void longPress(WebElement element){
         TouchAction TA=new TouchAction(driver);
         TA.longPress(LongPressOptions.longPressOptions().withElement(ElementOption.element(element))).release().perform();

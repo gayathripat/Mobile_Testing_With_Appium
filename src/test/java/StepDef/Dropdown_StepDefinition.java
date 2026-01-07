@@ -88,7 +88,7 @@ System.out.println("Dropdown select validated successfully");
     public void userNavigatesToRadioGroupSection() {
         ReusableMethods reusable=new ReusableMethods(driver);
         reusable.scrollText("Radio Group");
-        ReusableMethods ClickText=new ReusableMethods(driver);
+      //  ReusableMethods ClickText=new ReusableMethods(driver);
         reusable.selectText("Radio Group");
 
        // driver.findElement(By.xpath("//*[contains(@text,'Radio Group')]")).click();
