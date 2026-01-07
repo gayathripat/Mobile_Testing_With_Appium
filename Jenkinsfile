@@ -1,28 +1,24 @@
 pipeline {
-
-
-agent any
+    agent any
 
 
 tools {
 
 
-maven 'Maven3' // MUST match Global Tool Configuration name
+    maven 'Maven3' // MUST match Global Tool Configuration name
 
 
-}
+    }
 
 
 parameters {
 
 
-string(name: 'TagName', defaultValue: 'T_01', description: 'Cucumber tag')
+    string(name: 'TagName', defaultValue: 'T_01', description: 'Cucumber tag')
 
+    string(name: 'deviceName', defaultValue: 'emulator-5554', description: 'USB Device ID')
 
-string(name: 'deviceName', defaultValue: 'emulator-5554', description: 'USB Device ID')
-
-
-string(name: 'platformVersion', defaultValue: '16', description: 'Android Version')
+    string(name: 'platformVersion', defaultValue: '16', description: 'Android Version')
 
 
 }
@@ -31,45 +27,45 @@ string(name: 'platformVersion', defaultValue: '16', description: 'Android Versio
 stages {
 
 
-stage('Checkout SCM') {
+    stage('Checkout SCM') {
 
 
-steps {
+    steps {
 
 
-checkout scm
+    checkout scm
 
 
 }
 
 }
 
-stage('Build') {
-steps {
-bat 'mvn clean compile'
+    stage('Build') {
+    steps {
+    bat 'mvn clean compile'
 
-}
-}
+    }
+    }
 
-stage('Test') {
+    stage('Test') {
 
-steps {
-bat """
-mvn test ^
--Dcucumber.filter.tags=@%TagName% ^
--DdeviceName=%deviceName% ^
--DplatformVersion=%platformVersion%
+    steps {
+    bat """
+    mvn test ^
+    -Dcucumber.filter.tags=@%TagName% ^
+    -DdeviceName=%deviceName% ^
+    -DplatformVersion=%platformVersion%
 
-"""
-}
-}
+    """
+    }
+    }
 
-stage('Deliver') {
-steps {
-echo 'Test Execution Completed'
+    stage('Deliver') {
+    steps {
+    echo 'Test Execution Completed'
 
-}
-}
+    }
+    }
 
 }
 post {
@@ -78,7 +74,7 @@ post {
 always {
 
 
-archiveArtifacts artifacts: '\\/target/\\/\.html', fingerprint: true*
+archiveArtifacts artifacts: '**/target/**/*.html', fingerprint: true*
 
 
 }
