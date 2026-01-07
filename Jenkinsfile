@@ -30,7 +30,7 @@ stage('Test'){
 steps{
 bat ***mvn test^
 -Dcucucmber.filter.tags=@%TagName*^
--DdeviceName=%deviceName%^.filter.tags=@%TagName*^
+-DdeviceName=%deviceName%^.filter.tags=@%DeviceName*^
 -DPlatformVersion=%platformVersion%^
 ****
 
